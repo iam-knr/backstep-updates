@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>SafeStep Updates – update WordPress plugins without fear</title>
+<meta name="description" content="SafeStep Updates snapshots every WordPress plugin update, checks your site afterwards and rolls back automatically if the update breaks it.">
+<style>
+:root{
+  color-scheme:light;
+  --paper:#f6f4ef; --card:#fbfaf7; --ink:#14161a; --muted:#62666d; --rule:#d9d5cb; --rule-soft:#e7e3d9;
+  --accent:#0e5a3c; --accent-soft:#e1ece4; --fail:#b3331c; --fail-soft:#f3e0da;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font:17px/1.6 "Inter","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+
+/* top bar */
+.bar{border-bottom:1px solid var(--rule)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none;letter-spacing:-.01em}
+.logo svg{width:22px;height:22px}
+.bar nav{display:flex;align-items:center;gap:28px;font-size:15px}
+.bar nav a{text-decoration:none;color:var(--muted)}
+.bar nav a:hover{color:var(--ink)}
+@media(max-width:720px){.bar nav a.opt{display:none}}
+.btn{display:inline-block;padding:13px 22px;border-radius:3px;font-weight:550;font-size:16px;text-decoration:none;border:1px solid var(--ink);background:var(--ink);color:var(--paper);transition:background .15s}
+.btn:hover{background:#2c2f35}
+.btn.line{background:transparent;color:var(--ink)}
+.btn.line:hover{background:var(--rule-soft)}
+.btn.sm{padding:8px 16px;font-size:14.5px}
+
+/* type */
+h1{font-size:clamp(42px,7vw,88px);line-height:1;letter-spacing:-.04em;font-weight:600}
+h2{font-size:clamp(30px,4.2vw,50px);line-height:1.08;letter-spacing:-.03em;font-weight:600}
+h3{font-size:19px;letter-spacing:-.01em;font-weight:600}
+.label{display:flex;gap:14px;align-items:baseline;font-size:13.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
+.label b{color:var(--ink);font-weight:600}
+.lead{font-size:20px;line-height:1.5;color:var(--muted);max-width:560px}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+
+/* hero */
+.hero{padding:96px 0 0}
+.hero-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:28px;align-items:end}
+.hero h1{grid-column:1/9}
+.hero .side{grid-column:9/13;padding-bottom:10px}
+.hero .side p{color:var(--muted);font-size:18px;margin-bottom:24px}
+.ctas{display:flex;gap:10px;flex-wrap:wrap}
+@media(max-width:900px){.hero h1,.hero .side{grid-column:1/-1}.hero{padding-top:56px}}
+.meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:56px;padding:16px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font-size:14.5px;color:var(--muted)}
+.meta b{color:var(--ink);font-weight:600;margin-right:6px}
+
+/* screenshot frames: flat, hairline */
+.shot{border:1px solid var(--rule);background:var(--card)}
+.shot .tb{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--rule);font-size:13px;color:var(--muted)}
+.shot .tb i{width:9px;height:9px;border-radius:50%;border:1px solid var(--rule);background:var(--paper)}
+.shot .tb span{margin-left:8px}
+.hero-shot{margin-top:56px}
+
+/* sections */
+section{padding:110px 0;border-top:1px solid var(--rule)}
+.hero+section{margin-top:96px}
+.cols{display:grid;grid-template-columns:repeat(12,1fr);gap:28px}
+.cols .head{grid-column:1/6}
+.cols .body{grid-column:6/13}
+@media(max-width:900px){.cols .head,.cols .body{grid-column:1/-1}}
+.head .lead{margin-top:20px}
+
+/* problem list */
+.rows{display:grid}
+.rows .r{display:grid;grid-template-columns:56px 1fr;gap:12px;padding:22px 0;border-top:1px solid var(--rule)}
+.rows .r:first-child{border-top:0;padding-top:0}
+.rows .r .n{color:var(--muted);font-size:14px;padding-top:3px}
+.rows .r p{color:var(--muted);margin-top:4px}
+
+/* process */
+.process{display:grid;grid-template-columns:repeat(4,1fr);margin-top:56px;border:1px solid var(--rule)}
+.process .p{padding:26px 24px 30px;border-left:1px solid var(--rule);background:var(--card)}
+.process .p:first-child{border-left:0}
+.process .p .n{font-size:13px;color:var(--muted);margin-bottom:34px;display:flex;justify-content:space-between}
+.process .p h3{margin-bottom:8px}
+.process .p p{color:var(--muted);font-size:15.5px}
+.process .p.end{background:var(--accent-soft)}
+@media(max-width:900px){.process{grid-template-columns:1fr 1fr}.process .p:nth-child(3){border-left:0}.process .p:nth-child(n+3){border-top:1px solid var(--rule)}}
+@media(max-width:520px){.process{grid-template-columns:1fr}.process .p{border-left:0;border-top:1px solid var(--rule)}.process .p:first-child{border-top:0}}
+
+/* log demo */
+.log{margin-top:28px;border:1px solid var(--rule);background:var(--card);font-size:14.5px;line-height:1.75}
+.log .tb{padding:10px 18px;border-bottom:1px solid var(--rule);color:var(--muted);font-size:13px}
+.log .lines{padding:16px 18px 20px;min-height:228px}
+.ln{display:grid;grid-template-columns:26px 1fr;opacity:0;animation:in 14s infinite}
+.ln:nth-child(1){animation-delay:.3s}.ln:nth-child(2){animation-delay:1.6s}.ln:nth-child(3){animation-delay:2.9s}
+.ln:nth-child(4){animation-delay:4.4s}.ln:nth-child(5){animation-delay:5.8s}.ln:nth-child(6){animation-delay:7.2s}.ln:nth-child(7){animation-delay:8.4s}
+.ln.ok{color:var(--accent)}.ln.bad{color:var(--fail)}.ln.mut{color:var(--muted)}
+@keyframes in{0%{opacity:0}3%,86%{opacity:1}94%,100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.ln{animation:none;opacity:1}}
+
+/* features: ruled list */
+.feat{border-top:1px solid var(--ink);margin-top:48px}
+.feat .f{display:grid;grid-template-columns:repeat(12,1fr);gap:28px;padding:26px 0;border-bottom:1px solid var(--rule)}
+.feat .f h3{grid-column:1/5}
+.feat .f p{grid-column:5/12;color:var(--muted)}
+.feat .f .n{display:none}
+@media(max-width:820px){.feat .f h3,.feat .f p{grid-column:1/-1}.feat .f{gap:6px}}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.tag{font-size:13px;padding:2px 10px;border:1px solid var(--rule);border-radius:2px;color:var(--muted);background:var(--card)}
+
+/* tabs */
+.tabs input{position:absolute;opacity:0;pointer-events:none}
+.tablist{display:flex;gap:0;border-bottom:1px solid var(--rule);margin:44px 0 28px}
+.tablist label{padding:12px 22px 12px 0;margin-right:22px;cursor:pointer;font-weight:550;font-size:15.5px;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px}
+.panel{display:none}
+#t1:checked~.tablist label[for=t1],#t2:checked~.tablist label[for=t2],#t3:checked~.tablist label[for=t3]{color:var(--ink);border-bottom-color:var(--ink)}
+#t1:checked~.panels #p1,#t2:checked~.panels #p2,#t3:checked~.panels #p3{display:block}
+#t1:focus-visible~.tablist label[for=t1],#t2:focus-visible~.tablist label[for=t2],#t3:focus-visible~.tablist label[for=t3]{outline:2px solid var(--ink);outline-offset:3px}
+.panel .cap{color:var(--muted);font-size:15.5px;margin-top:14px}
+.panel.small .shot{max-width:830px}
+
+/* email */
+.mail{border:1px solid var(--rule);background:var(--card)}
+.mail .hd{padding:18px 22px;border-bottom:1px solid var(--rule)}
+.mail .hd b{display:block;font-weight:600;font-size:16px}
+.mail .hd span{font-size:13.5px;color:var(--muted)}
+.mail .bd{padding:22px;white-space:pre-line}
+.status{display:inline-block;font-size:13px;font-weight:600;padding:3px 10px;border-radius:2px;margin-right:8px;margin-top:22px}
+.status.bad{background:var(--fail-soft);color:var(--fail)}.status.ok{background:var(--accent-soft);color:var(--accent)}
+
+/* compare */
+.cmp{margin-top:48px;border-top:1px solid var(--ink)}
+.cr{display:grid;grid-template-columns:1.7fr 1fr 1.2fr;gap:16px;padding:16px 0;border-bottom:1px solid var(--rule);font-size:16px}
+.cr.h{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:12px 0}
+.cr .m{color:var(--muted)}.cr .y{color:var(--accent);font-weight:600}
+@media(max-width:640px){.cr{grid-template-columns:1fr 1fr}.cr>:first-child{grid-column:1/-1;font-weight:600}.cr.h{display:none}}
+
+/* limits */
+.limits{list-style:none;padding:0}
+.limits li{padding:18px 0;border-top:1px solid var(--rule);color:var(--muted)}
+.limits li:first-child{border-top:0;padding-top:0}
+.limits b{color:var(--ink);font-weight:600}
+
+/* faq */
+details{border-top:1px solid var(--rule);padding:20px 0}
+details:last-of-type{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer;font-weight:550;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:20px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-weight:300;font-size:26px;line-height:1;color:var(--muted)}
+details[open] summary::after{content:"–"}
+details p{color:var(--muted);margin-top:10px;max-width:640px}
+
+/* get */
+.get{background:var(--ink);color:var(--paper);border-top:0}
+.get .label,.get .label b{color:#a9a69c}
+.get h2{max-width:640px}
+.get p{color:#bdbab0;margin-top:18px;max-width:520px;font-size:18px}
+.get .btn{background:var(--paper);color:var(--ink);border-color:var(--paper);margin-top:32px}
+.get .btn:hover{background:#fff}
+.get small{display:block;margin-top:18px;color:#a9a69c;font-size:14px}
+footer{padding:28px 0 44px;font-size:14px;color:var(--muted);background:var(--ink);border-top:1px solid #2b2e34}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:#a9a69c}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="wrap">
+  <a class="logo" href="#top" aria-label="SafeStep Updates"><svg viewBox="0 0 22 22" aria-hidden="true"><rect width="22" height="22" fill="#14161a"/><path d="M5.5 11.5l3.7 3.7L16.5 7.5" fill="none" stroke="#f6f4ef" stroke-width="2.2" stroke-linecap="square"/></svg>SafeStep</a>
+  <nav><a class="opt" href="#how">How it works</a><a class="opt" href="#features">Features</a><a class="opt" href="#inside">Screens</a><a class="opt" href="#faq">FAQ</a><a class="opt" href="https://github.com/iam-knr/safestep-updates">GitHub</a><a class="btn sm" href="#get">Download</a></nav>
+</div></div>
+
+<main id="top">
+
+<header class="hero"><div class="wrap">
+  <div class="hero-grid">
+    <h1>Update plugins without the fear.</h1>
+    <div class="side">
+      <p>SafeStep saves a copy before every plugin update, checks your site right after, and restores the old version if something breaks.</p>
+      <div class="ctas"><a class="btn" href="#get">Download free</a><a class="btn line" href="#how">How it works</a></div>
+    </div>
+  </div>
+  <div class="meta"><span><b>Free</b>GPL licence</span><span><b>WordPress</b>6.0 or newer</span><span><b>PHP</b>7.4 or newer</span><span><b>Covers</b>manual, automatic and WP-CLI updates</span></div>
+  <figure class="shot hero-shot"><div class="tb"><i></i><i></i><i></i><span>Tools → SafeStep → Activity</span></div><img src="img/activity.png" alt="SafeStep activity log: an update rolled back from 3.0.0 to 2.0.0, and one that succeeded" width="1120" height="360"></figure>
+</div></header>
+
+<section id="problem"><div class="wrap cols">
+  <div class="head"><div class="label"><b>01</b> The problem</div><h2>Updates fix sites. They also break them.</h2></div>
+  <div class="body rows">
+    <div class="r"><span class="n">a</span><div><h3>You put it off</h3><p>Skipped updates leave known problems unfixed. Fear of a broken site is the usual reason.</p></div></div>
+    <div class="r"><span class="n">b</span><div><h3>A bad one lands</h3><p>A bug, or a clash with another plugin, and visitors see an error page.</p></div></div>
+    <div class="r"><span class="n">c</span><div><h3>You find out late</h3><p>Nobody is watching at 3 a.m. The site stays down until someone notices.</p></div></div>
+  </div>
+</div></section>
+
+<section id="how"><div class="wrap">
+  <div class="cols"><div class="head"><div class="label"><b>02</b> How it works</div><h2>A safety net around every update.</h2></div>
+  <div class="body"><p class="lead">WordPress installs the update the way it always does. SafeStep adds a copy before, a check after, and a way back.</p></div></div>
+  <div class="process">
+    <div class="p"><div class="n"><span>Step 1</span></div><h3>Snapshot</h3><p>The plugin's current files are copied into a protected folder just before they're replaced.</p></div>
+    <div class="p"><div class="n"><span>Step 2</span></div><h3>Install</h3><p>WordPress installs the update as normal. Your workflow doesn't change.</p></div>
+    <div class="p"><div class="n"><span>Step 3</span></div><h3>Check</h3><p>Home, login and any pages you list are requested. A server error or PHP fatal is a failure. Existing problems are ignored.</p></div>
+    <div class="p end"><div class="n"><span>Step 4</span></div><h3>Keep or roll back</h3><p>Healthy: nothing more happens. Broken: the old version returns, you get an email, the bad version is held.</p></div>
+  </div>
+  <div class="log mono" role="img" aria-label="Example: update installed, site check fails with HTTP 500, previous version restored and email sent">
+    <div class="tb">update · acme-shop-booster</div>
+    <div class="lines">
+      <div class="ln mut"><span>→</span><span>Update available: 2.0.0 → 3.0.0</span></div>
+      <div class="ln ok"><span>✓</span><span>Snapshot saved (2.0.0)</span></div>
+      <div class="ln mut"><span>→</span><span>Installing 3.0.0</span></div>
+      <div class="ln mut"><span>→</span><span>Checking home, login, /checkout/</span></div>
+      <div class="ln bad"><span>✕</span><span>Home page returned HTTP 500</span></div>
+      <div class="ln ok"><span>✓</span><span>Rolled back to 2.0.0. Site is healthy.</span></div>
+      <div class="ln ok"><span>✓</span><span>Version 3.0.0 on hold. Email sent.</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="features"><div class="wrap">
+  <div class="label"><b>03</b> What you get</div>
+  <h2>Small, focused, on your side.</h2>
+  <div class="feat">
+    <div class="f"><h3>Snapshot before every update</h3><div style="grid-column:5/12"><p style="grid-column:auto">Covers the Plugins screen, the Updates screen, bulk updates, automatic updates and WP-CLI. Keep as many past versions as you like.</p></div></div>
+    <div class="f"><h3>Health check afterwards</h3><p>Home page, login page and pages you add, such as /shop/ or /checkout/. Compared with how the site behaved before the update.</p></div>
+    <div class="f"><h3>Automatic rollback</h3><p>When an update causes a new failure, the previous version is restored before most visitors notice.</p></div>
+    <div class="f"><h3>Version hold</h3><p>A version that broke your site isn't installed automatically again. Release the hold when a fix ships.</p></div>
+    <div class="f"><h3>Email alerts</h3><p>Know the moment something is rolled back, even when you weren't looking.</p></div>
+    <div class="f"><h3>Restore and log</h3><p>Restore any snapshot in one click, and see a history of every update, rollback and restore.</p></div>
+  </div>
+</div></section>
+
+<section id="inside"><div class="wrap">
+  <div class="label"><b>04</b> Inside WordPress</div>
+  <h2>Everything lives under Tools → SafeStep.</h2>
+  <p class="lead" style="margin-top:18px">One screen for settings, held versions, snapshots and history. These are real screenshots from a test site.</p>
+  <div class="tabs">
+    <input type="radio" name="t" id="t1" checked><input type="radio" name="t" id="t2"><input type="radio" name="t" id="t3">
+    <div class="tablist" role="tablist"><label for="t1">Settings</label><label for="t2">Snapshots</label><label for="t3">Activity</label></div>
+    <div class="panels">
+      <div class="panel" id="p1"><figure class="shot"><div class="tb"><i></i><i></i><i></i><span>Tools → SafeStep</span></div><img src="img/settings.png" alt="SafeStep settings screen" width="1120" height="740" loading="lazy"></figure><p class="cap">Choose auto-updates, exclude plugins, add pages like /checkout/, set an alert email.</p></div>
+      <div class="panel small" id="p2"><figure class="shot"><div class="tb"><i></i><i></i><i></i><span>Tools → SafeStep</span></div><img src="img/snapshots.png" alt="Versions on hold and snapshots with Restore buttons" width="830" height="420" loading="lazy"></figure><p class="cap">See what's on hold and restore any saved copy with one click.</p></div>
+      <div class="panel" id="p3"><figure class="shot"><div class="tb"><i></i><i></i><i></i><span>Tools → SafeStep</span></div><img src="img/activity.png" alt="Activity log of updates and rollbacks" width="1120" height="360" loading="lazy"></figure><p class="cap">Every update, rollback and restore, with the reason.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="alert"><div class="wrap cols">
+  <div class="head"><div class="label"><b>05</b> When something breaks</div><h2>You hear about it first.</h2><p class="lead">By the time you read the email, the site is already back on the working version.</p><div><span class="status bad">Rolled back</span><span class="status ok">Updated OK</span></div></div>
+  <div class="body"><div class="mail" role="img" aria-label="Example alert email from SafeStep"><div class="hd"><b>[Acme Shop] SafeStep rolled back Acme Shop Booster</b><span>To owner@acmeshop.example · example message</span></div><div class="bd">Updating Acme Shop Booster from 2.0.0 to 3.0.0 broke the site, so SafeStep restored 2.0.0.
+This version will not be retried automatically.</div></div></div>
+</div></section>
+
+<section id="vs"><div class="wrap">
+  <div class="cols"><div class="head"><div class="label"><b>06</b> Compared with WordPress</div><h2>Plain about where it helps.</h2></div>
+  <div class="body"><p class="lead">WordPress 6.6 and later already rolls back an automatic update that causes a fatal error. SafeStep covers what that doesn't.</p></div></div>
+  <div class="cmp">
+    <div class="cr h"><span>Situation</span><span>WordPress core</span><span>SafeStep</span></div>
+    <div class="cr"><span>Automatic update causes a PHP fatal error</span><span class="y" style="color:var(--ink)">Rolls back</span><span class="y">Rolls back</span></div>
+    <div class="cr"><span>Update you click yourself, bulk, or WP-CLI</span><span class="m">No rollback</span><span class="y">Snapshot, check, rollback</span></div>
+    <div class="cr"><span>HTTP 5xx error without a fatal</span><span class="m">Not checked</span><span class="y">Detected</span></div>
+    <div class="cr"><span>Keep older versions to restore later</span><span class="m">No</span><span class="y">Yes, you choose how many</span></div>
+    <div class="cr"><span>Don't retry a version that already failed</span><span class="m">No</span><span class="y">Version hold</span></div>
+    <div class="cr"><span>Email when a rollback happens</span><span class="m">No</span><span class="y">Yes</span></div>
+  </div>
+</div></section>
+
+<section id="limits"><div class="wrap cols">
+  <div class="head"><div class="label"><b>07</b> Limits</div><h2>What SafeStep doesn't do.</h2></div>
+  <div class="body"><ul class="limits">
+    <li><b>It isn't a backup plugin.</b> It stores plugin files only, not your database, uploads or themes.</li>
+    <li><b>It only handles plugins.</b> Themes and WordPress core aren't updated.</li>
+    <li><b>It can't see every breakage.</b> It looks for server errors and PHP fatals on the pages it checks, not a checkout that silently stops working. Add key pages to the list.</li>
+    <li><b>Single sites for now.</b> Multisite isn't supported yet.</li>
+  </ul></div>
+</div></section>
+
+<section id="faq"><div class="wrap cols">
+  <div class="head"><div class="label"><b>08</b> FAQ</div><h2>Questions people ask.</h2></div>
+  <div class="body">
+    <details><summary>Does it send data anywhere?</summary><p>No. SafeStep connects to no external service. The health check only requests your own home page, login page and the pages you list, on your own domain.</p></details>
+    <details><summary>What if my site was already broken before the update?</summary><p>SafeStep compares against the state before the update, so existing problems don't trigger a rollback.</p></details>
+    <details><summary>Where are snapshots stored?</summary><p>In a randomly named, access-protected folder inside your uploads directory. They're deleted when you uninstall the plugin.</p></details>
+    <details><summary>Why does it ask my site to clear the PHP cache?</summary><p>Servers can keep an old compiled copy of a plugin for a few seconds, which would hide a problem. Before checking, SafeStep sends a one-time request, secured with a random token that expires after 60 seconds, asking the server to clear its opcache.</p></details>
+    <details><summary>Will it roll back a fine update that breaks one of my pages?</summary><p>Only the pages it checks are considered. Add your shop or checkout under "Extra pages to check".</p></details>
+    <details><summary>Does it cost anything?</summary><p>The plugin is free and open source (GPL).</p></details>
+  </div>
+</div></section>
+
+<section class="get" id="get"><div class="wrap">
+  <div class="label"><b>09</b> Get it</div>
+  <h2>Install in a minute.</h2>
+  <p>Upload, activate, and manual updates are protected straight away. Open Tools → SafeStep to turn on auto-updates.</p>
+  <a class="btn" href="safestep-updates-0.2.0.zip" download>Download v0.2.0 (.zip)</a>
+  <small>Plugins → Add New → Upload Plugin → choose the zip → Activate</small>
+</div></section>
+
+</main>
+
+<footer><div class="wrap">
+  <span>© SafeStep Updates · GPL-2.0-or-later · Built by Kailas (KNR) Nath R · <a href="https://github.com/iam-knr/safestep-updates">Source on GitHub</a></span>
+  <span>An independent plugin, not affiliated with WordPress.org or Automattic.</span>
+</div></footer>
+
+</body>
+</html>

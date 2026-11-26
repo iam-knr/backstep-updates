@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<title>SafeStep Updates – update WordPress plugins without fear</title>
-<meta name="description" content="SafeStep Updates snapshots every WordPress plugin update, checks your site afterwards and rolls back automatically if the update breaks it.">
+<title>Backstep Updates – update WordPress plugins without fear</title>
+<meta name="description" content="Backstep Updates snapshots every WordPress plugin update, checks your site afterwards and rolls back automatically if the update breaks it.">
 <style>
 :root{
   color-scheme:light;
@@ -166,8 +166,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 <body>
 
 <div class="bar"><div class="wrap">
-  <a class="logo" href="#top" aria-label="SafeStep Updates"><svg viewBox="0 0 22 22" aria-hidden="true"><rect width="22" height="22" fill="#14161a"/><path d="M5.5 11.5l3.7 3.7L16.5 7.5" fill="none" stroke="#f6f4ef" stroke-width="2.2" stroke-linecap="square"/></svg>SafeStep</a>
-  <nav><a class="opt" href="#how">How it works</a><a class="opt" href="#features">Features</a><a class="opt" href="#inside">Screens</a><a class="opt" href="#faq">FAQ</a><a class="opt" href="https://github.com/iam-knr/safestep-updates">GitHub</a><a class="btn sm" href="#get">Download</a></nav>
+  <a class="logo" href="#top" aria-label="Backstep Updates"><svg viewBox="0 0 22 22" aria-hidden="true"><rect width="22" height="22" fill="#14161a"/><path d="M5.5 11.5l3.7 3.7L16.5 7.5" fill="none" stroke="#f6f4ef" stroke-width="2.2" stroke-linecap="square"/></svg>Backstep</a>
+  <nav><a class="opt" href="#how">How it works</a><a class="opt" href="#features">Features</a><a class="opt" href="#inside">Screens</a><a class="opt" href="#faq">FAQ</a><a class="opt" href="https://github.com/iam-knr/backstep-updates">GitHub</a><a class="btn sm" href="#get">Download</a></nav>
 </div></div>
 
 <main id="top">
@@ -176,12 +176,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
   <div class="hero-grid">
     <h1>Update plugins without the fear.</h1>
     <div class="side">
-      <p>SafeStep saves a copy before every plugin update, checks your site right after, and restores the old version if something breaks.</p>
+      <p>Backstep saves a copy before every plugin update, checks your site right after, and restores the old version if something breaks.</p>
       <div class="ctas"><a class="btn" href="#get">Download free</a><a class="btn line" href="#how">How it works</a></div>
     </div>
   </div>
   <div class="meta"><span><b>Free</b>GPL licence</span><span><b>WordPress</b>6.0 or newer</span><span><b>PHP</b>7.4 or newer</span><span><b>Covers</b>manual, automatic and WP-CLI updates</span></div>
-  <figure class="shot hero-shot"><div class="tb"><i></i><i></i><i></i><span>Tools → SafeStep → Activity</span></div><img src="img/activity.png" alt="SafeStep activity log: an update rolled back from 3.0.0 to 2.0.0, and one that succeeded" width="1120" height="360"></figure>
+  <figure class="shot hero-shot"><div class="tb"><i></i><i></i><i></i><span>Tools → Backstep → Activity</span></div><img src="img/activity.png" alt="Backstep activity log: an update rolled back from 3.0.0 to 2.0.0, and one that succeeded" width="1120" height="360"></figure>
 </div></header>
 
 <section id="problem"><div class="wrap cols">
@@ -195,9 +195,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 
 <section id="how"><div class="wrap">
   <div class="cols"><div class="head"><div class="label"><b>02</b> How it works</div><h2>A safety net around every update.</h2></div>
-  <div class="body"><p class="lead">WordPress installs the update the way it always does. SafeStep adds a copy before, a check after, and a way back.</p></div></div>
+  <div class="body"><p class="lead">WordPress installs the update the way it always does. Backstep adds a copy before, a check after, and a way back.</p></div></div>
   <div class="process">
-    <div class="p"><div class="n"><span>Step 1</span></div><h3>Snapshot</h3><p>The plugin's current files are copied into a protected folder just before they're replaced.</p></div>
+    <div class="p"><div class="n"><span>Step 1</span></div><h3>Snapshot</h3><p>The plugin's current files are copied into a zip archive just before they're replaced.</p></div>
     <div class="p"><div class="n"><span>Step 2</span></div><h3>Install</h3><p>WordPress installs the update as normal. Your workflow doesn't change.</p></div>
     <div class="p"><div class="n"><span>Step 3</span></div><h3>Check</h3><p>Home, login and any pages you list are requested. A server error or PHP fatal is a failure. Existing problems are ignored.</p></div>
     <div class="p end"><div class="n"><span>Step 4</span></div><h3>Keep or roll back</h3><p>Healthy: nothing more happens. Broken: the old version returns, you get an email, the bad version is held.</p></div>
@@ -231,30 +231,30 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 
 <section id="inside"><div class="wrap">
   <div class="label"><b>04</b> Inside WordPress</div>
-  <h2>Everything lives under Tools → SafeStep.</h2>
+  <h2>Everything lives under Tools → Backstep.</h2>
   <p class="lead" style="margin-top:18px">One screen for settings, held versions, snapshots and history. These are real screenshots from a test site.</p>
   <div class="tabs">
     <input type="radio" name="t" id="t1" checked><input type="radio" name="t" id="t2"><input type="radio" name="t" id="t3">
     <div class="tablist" role="tablist"><label for="t1">Settings</label><label for="t2">Snapshots</label><label for="t3">Activity</label></div>
     <div class="panels">
-      <div class="panel" id="p1"><figure class="shot"><div class="tb"><i></i><i></i><i></i><span>Tools → SafeStep</span></div><img src="img/settings.png" alt="SafeStep settings screen" width="1120" height="740" loading="lazy"></figure><p class="cap">Choose auto-updates, exclude plugins, add pages like /checkout/, set an alert email.</p></div>
-      <div class="panel small" id="p2"><figure class="shot"><div class="tb"><i></i><i></i><i></i><span>Tools → SafeStep</span></div><img src="img/snapshots.png" alt="Versions on hold and snapshots with Restore buttons" width="830" height="420" loading="lazy"></figure><p class="cap">See what's on hold and restore any saved copy with one click.</p></div>
-      <div class="panel" id="p3"><figure class="shot"><div class="tb"><i></i><i></i><i></i><span>Tools → SafeStep</span></div><img src="img/activity.png" alt="Activity log of updates and rollbacks" width="1120" height="360" loading="lazy"></figure><p class="cap">Every update, rollback and restore, with the reason.</p></div>
+      <div class="panel" id="p1"><figure class="shot"><div class="tb"><i></i><i></i><i></i><span>Tools → Backstep</span></div><img src="img/settings.png" alt="Backstep settings screen" width="1120" height="740" loading="lazy"></figure><p class="cap">Choose auto-updates, exclude plugins, add pages like /checkout/, set an alert email.</p></div>
+      <div class="panel small" id="p2"><figure class="shot"><div class="tb"><i></i><i></i><i></i><span>Tools → Backstep</span></div><img src="img/snapshots.png" alt="Versions on hold and snapshots with Restore buttons" width="830" height="420" loading="lazy"></figure><p class="cap">See what's on hold and restore any saved copy with one click.</p></div>
+      <div class="panel" id="p3"><figure class="shot"><div class="tb"><i></i><i></i><i></i><span>Tools → Backstep</span></div><img src="img/activity.png" alt="Activity log of updates and rollbacks" width="1120" height="360" loading="lazy"></figure><p class="cap">Every update, rollback and restore, with the reason.</p></div>
     </div>
   </div>
 </div></section>
 
 <section id="alert"><div class="wrap cols">
   <div class="head"><div class="label"><b>05</b> When something breaks</div><h2>You hear about it first.</h2><p class="lead">By the time you read the email, the site is already back on the working version.</p><div><span class="status bad">Rolled back</span><span class="status ok">Updated OK</span></div></div>
-  <div class="body"><div class="mail" role="img" aria-label="Example alert email from SafeStep"><div class="hd"><b>[Acme Shop] SafeStep rolled back Acme Shop Booster</b><span>To owner@acmeshop.example · example message</span></div><div class="bd">Updating Acme Shop Booster from 2.0.0 to 3.0.0 broke the site, so SafeStep restored 2.0.0.
+  <div class="body"><div class="mail" role="img" aria-label="Example alert email from Backstep"><div class="hd"><b>[Acme Shop] Backstep rolled back Acme Shop Booster</b><span>To owner@acmeshop.example · example message</span></div><div class="bd">Updating Acme Shop Booster from 2.0.0 to 3.0.0 broke the site, so Backstep restored 2.0.0.
 This version will not be retried automatically.</div></div></div>
 </div></section>
 
 <section id="vs"><div class="wrap">
   <div class="cols"><div class="head"><div class="label"><b>06</b> Compared with WordPress</div><h2>Plain about where it helps.</h2></div>
-  <div class="body"><p class="lead">WordPress 6.6 and later already rolls back an automatic update that causes a fatal error. SafeStep covers what that doesn't.</p></div></div>
+  <div class="body"><p class="lead">WordPress 6.6 and later already rolls back an automatic update that causes a fatal error. Backstep covers what that doesn't.</p></div></div>
   <div class="cmp">
-    <div class="cr h"><span>Situation</span><span>WordPress core</span><span>SafeStep</span></div>
+    <div class="cr h"><span>Situation</span><span>WordPress core</span><span>Backstep</span></div>
     <div class="cr"><span>Automatic update causes a PHP fatal error</span><span class="y" style="color:var(--ink)">Rolls back</span><span class="y">Rolls back</span></div>
     <div class="cr"><span>Update you click yourself, bulk, or WP-CLI</span><span class="m">No rollback</span><span class="y">Snapshot, check, rollback</span></div>
     <div class="cr"><span>HTTP 5xx error without a fatal</span><span class="m">Not checked</span><span class="y">Detected</span></div>
@@ -265,7 +265,7 @@ This version will not be retried automatically.</div></div></div>
 </div></section>
 
 <section id="limits"><div class="wrap cols">
-  <div class="head"><div class="label"><b>07</b> Limits</div><h2>What SafeStep doesn't do.</h2></div>
+  <div class="head"><div class="label"><b>07</b> Limits</div><h2>What Backstep doesn't do.</h2></div>
   <div class="body"><ul class="limits">
     <li><b>It isn't a backup plugin.</b> It stores plugin files only, not your database, uploads or themes.</li>
     <li><b>It only handles plugins.</b> Themes and WordPress core aren't updated.</li>
@@ -277,10 +277,10 @@ This version will not be retried automatically.</div></div></div>
 <section id="faq"><div class="wrap cols">
   <div class="head"><div class="label"><b>08</b> FAQ</div><h2>Questions people ask.</h2></div>
   <div class="body">
-    <details><summary>Does it send data anywhere?</summary><p>No. SafeStep connects to no external service. The health check only requests your own home page, login page and the pages you list, on your own domain.</p></details>
-    <details><summary>What if my site was already broken before the update?</summary><p>SafeStep compares against the state before the update, so existing problems don't trigger a rollback.</p></details>
-    <details><summary>Where are snapshots stored?</summary><p>In a randomly named, access-protected folder inside your uploads directory. They're deleted when you uninstall the plugin.</p></details>
-    <details><summary>Why does it ask my site to clear the PHP cache?</summary><p>Servers can keep an old compiled copy of a plugin for a few seconds, which would hide a problem. Before checking, SafeStep sends a one-time request, secured with a random token that expires after 60 seconds, asking the server to clear its opcache.</p></details>
+    <details><summary>Does it send data anywhere?</summary><p>No. Backstep connects to no external service. The health check only requests your own home page, login page and the pages you list, on your own domain.</p></details>
+    <details><summary>What if my site was already broken before the update?</summary><p>Backstep compares against the state before the update, so existing problems don't trigger a rollback.</p></details>
+    <details><summary>Where are snapshots stored?</summary><p>As zip archives in a <code>backstep-updates</code> folder inside your uploads directory. They're deleted when you uninstall the plugin.</p></details>
+    <details><summary>Why does it ask my site to clear the PHP cache?</summary><p>Servers can keep an old compiled copy of a plugin for a few seconds, which would hide a problem. Before checking, Backstep sends a one-time request, secured with a random token that expires after 60 seconds, asking the server to clear its opcache.</p></details>
     <details><summary>Will it roll back a fine update that breaks one of my pages?</summary><p>Only the pages it checks are considered. Add your shop or checkout under "Extra pages to check".</p></details>
     <details><summary>Does it cost anything?</summary><p>The plugin is free and open source (GPL).</p></details>
   </div>
@@ -289,15 +289,15 @@ This version will not be retried automatically.</div></div></div>
 <section class="get" id="get"><div class="wrap">
   <div class="label"><b>09</b> Get it</div>
   <h2>Install in a minute.</h2>
-  <p>Upload, activate, and manual updates are protected straight away. Open Tools → SafeStep to turn on auto-updates.</p>
-  <a class="btn" href="safestep-updates-0.2.0.zip" download>Download v0.2.0 (.zip)</a>
+  <p>Upload, activate, and manual updates are protected straight away. Open Tools → Backstep to add the pages you care about.</p>
+  <a class="btn" href="backstep-updates-0.2.1.zip" download>Download v0.2.1 (.zip)</a>
   <small>Plugins → Add New → Upload Plugin → choose the zip → Activate</small>
 </div></section>
 
 </main>
 
 <footer><div class="wrap">
-  <span>© SafeStep Updates · GPL-2.0-or-later · Built by Kailas (KNR) Nath R · <a href="https://github.com/iam-knr/safestep-updates">Source on GitHub</a></span>
+  <span>© Backstep Updates · GPL-2.0-or-later · Built by Kailas Nath R · <a href="https://github.com/iam-knr/backstep-updates">Source on GitHub</a></span>
   <span>An independent plugin, not affiliated with WordPress.org or Automattic.</span>
 </div></footer>
 
